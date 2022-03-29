@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-middleware": "^3.4.2",
+    "express-session": "^1.17.2",
+    "nodemon": "^2.0.15"
+  }
+}
