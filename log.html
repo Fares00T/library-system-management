@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body id="log-body">
+    <h1>welcome to your book library</h1>
+    <main id="log">
+      <div id="login">
+        <div class="form-login">
+          <h2>LOGIN</h2>
+          <input
+            class="input-login"
+            id="loginEmail"
+            type="text"
+            name="email"
+            class="class-book"
+            placeholder="email"
+          />
+          <input
+            class="input-login"
+            id="loginPassword"
+            type="password"
+            name="password"
+            class="class-book"
+            placeholder="PASSWORD"
+          />
+          <input
+            class="button-login input-login"
+            id="loginBut"
+            type="submit"
+            value="LOGIN"
+          />
+        </div>
+      </div>
+      <div id="register">
+        <div class="register-form">
+          <h2>Register</h2>
+          <input
+            class="register"
+            id="username"
+            type="text"
+            name="username"
+            class="class-book"
+            placeholder="USERNAME"
+          />
+          <input
+            class="register"
+            id="password"
+            type="password"
+            name="password"
+            class="class-book"
+            placeholder="PASSWORD"
+          />
+          <input
+            class="register"
+            id="email"
+            type="email"
+            name="email"
+            class="class-book"
+            placeholder="email"
+          />
+          <input
+            class="register register-but"
+            id="registerBut"
+            type="submit"
+            value="REGISTER"
+          />
+        </div>
+      </div>
+    </main>
+  </body>
+
+  <script>
+    const reg = document.getElementById("registerBut");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const username = document.getElementById("username");
+
+    reg.onclick = () => {
+      let data = {
+        email: email.value,
+        password: password.value,
+        username: username.value,
+      };
+      console.log(data);
+      axios.post("/register", data).then((res) => {
+        console.log(res);
+      });
+    };
+
+    const login = document.getElementById("loginBut");
+    const loginEmail = document.getElementById("loginEmail");
+    const loginPassword = document.getElementById("loginPassword");
+
+    login.onclick = () => {
+      let loginData = {
+        loginEmail: loginEmail.value,
+        loginPassword: loginPassword.value,
+        username: username.value,
+      };
+      axios
+        .post("/login", loginData)
+        .then((res) => {
+          location.href = "/home";
+        })
+        .catch((err) => {
+          alert(err.response.body);
+        });
+    };
+  </script>
+</html>

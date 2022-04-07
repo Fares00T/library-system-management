@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <nav class="nav">
+      <ul class="navBar">
+        <li class="Home"><a href="/home">Home</a></li>
+        <li class="addBook">
+          <a class="addBookA" href="/addBook">add Books</a>
+        </li>
+        <li class="logout"><a href="/logout"> logout</a></li>
+        <div id="userName"></div>
+      </ul>
+    </nav>
+    <hr />
+    <div id="bookDis"></div>
+  </body>
+  <script>
+    axios.get("/bookslist").then((res) => {
+      res.data.forEach((book, i) => {
+        document.getElementById("bookDis").insertAdjacentHTML(
+          "beforeend",
+          `
+          <div class="books-info">
+            <div>
+              <p class="book-name info">Book Name : ${book.bookName}</p>
+              <p class="author info">Book Author : ${book.author}</p>
+              <p class="publicher info">Book Publisher  : ${book.publisher}</div>
+              <p class="des info">Book Description : ${book.des}</p>
+              <br/>
+            </div>
+          </div>
+
+        `
+        );
+      });
+    });
+    /*
+    axios.get("/theName").then((res) => {
+      res.data.forEach((theNameuser, i) => {
+        document.getElementById("userName").insertAdjacentHTML(
+          "beforeend",
+          `
+          <div>
+            <p> USERNAME : ${theNameuser.username} </p>
+          </div>
+        `
+        );
+        
+      });
+    });
+    */
+  </script>
+</html>

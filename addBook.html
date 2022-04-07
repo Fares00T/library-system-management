@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/main.css" /></script>
-    <script defer src="./public/javascript/logInfo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
     <title>Document</title>
   </head>
   <body>
@@ -24,37 +25,58 @@
     </div>
     <div id="addBook">
         <div class="modal-content">
-          <form id="addBookForm" action="http://localhost:3000/addbook" method="post">
+          <div id="addBookForm" >
             <div class="modal-header">
               <h4 class="modal-title">Add Book Details</h4>
             </div>
             <div class="modal-body">
               <div class="form-group">
-                <label>ISBN :</label>
-                <input type="text" name="ISBN"  class="form-control" required />
-              </div>
-              <div class="form-group">
                 <label>Book Name :</label>
-                <input type="text" name="bookName" class="form-control" required />
+                <input type="text" name="bookName" class="form-control" id="bookName" required />
               </div>
               <div class="form-group">
                 <label>Author :</label>
-                <input type="text" name="Author" class="form-control" required />
+                <input type="text" name="Author" class="form-control" id="author" required />
               </div>
               <div class="form-group">
                 <label>Publisher :</label>
-                <input type="text" name="Publisher" class="form-control" required />
+                <input type="text" name="Publisher" class="form-control" id="publisher" required />
               </div>
               <div class="form-group">
                 <label>Description :</label>
-                <textarea name="Description" class="form-control" required></textarea>
+                <textarea name="Description" class="form-control" id="des" required></textarea>
               </div>
             </div>
             <div class="modal-footer">
-              <input type="submit" value="Add" />
+              <input type="submit" id="addBookBut" value="Add" />
             </div>
-          </form>
+          </div>
         </div>
     </div>
   </body>
+  <script>
+    const addBook = document.getElementById("addBookBut");
+    const des = document.getElementById("des");
+    const publisher = document.getElementById("publisher");
+    const author = document.getElementById("author");
+    const bookName = document.getElementById("bookName");
+
+    addBook.onclick = () => {
+      let bookData = {
+        des: des.value,
+        publisher: publisher.value,
+        author: author.value,
+        bookName: bookName.value,
+      };
+      console.log(bookData);
+      axios
+      .post("/addbooktext", bookData)
+      .then((res) => {
+        location.href = "/home";
+      })
+         .catch((err) => {
+           alert(err.response.body);
+        });
+    };
+  </script>
 </html>
